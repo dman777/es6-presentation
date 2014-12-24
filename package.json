@@ -1,0 +1,21 @@
+{
+  "name": "eS6-presentation",
+  "version": "0.0.1",
+  "description": "ES6 presentation",
+  "devDependencies": {
+    "bluebird": "^2.4.2",
+    "connect": "^3.3.3",
+    "connect-livereload": "^0.5.2",
+    "gulp": "~3.8.10",
+    "gulp-inject": "^1.1.1",
+    "gulp-livereload": "^3.0.2",
+    "serve-static": "^1.7.1",
+    "wiredep": "^2.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dman777/es6-presentation.git"
+  },
+  "author": "Darin Hensley",
+  "readmeFilename": "README.md"
+}
