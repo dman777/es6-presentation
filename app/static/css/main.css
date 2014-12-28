@@ -1,0 +1,77 @@
+body {
+	background-color: #ECF0F1;
+	font-family: 'PT Sans', sans-serif;
+}
+#title {
+	margin: auto;
+	color: #2C3E50;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#title span {
+	font-size: 300%;
+	font-family: inherit;
+}
+
+
+#title h1 {
+	margin-top: -20px;
+	font-size: 500%;
+	font-family: inherit;
+	font-weight: 100;
+}
+
+
+.step {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+
+    font-family: 'PT Serif', georgia, serif;
+}
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0.3;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition:    opacity 1s;
+    -ms-transition:     opacity 1s;
+    -o-transition:      opacity 1s;
+    transition:         opacity 1s;
+}
+
+.impress-enabled .step.active { opacity: 1 }
+
+#releaseDate * {
+	font-size: 45px;
+	font-family: inherit;
+	font-weight: 100;
+    width: 400%;
+}
+
+#tableOfContents *, #howTo * {
+	font-size: 30px;
+	font-family: inherit;
+	width: 400%;
+	font-weight: 100;
+    width: 400%;
+}
+
+#pressMe {
+	color: white;
+	background-color: #1ABC9C;
+	border-radius: 6px;
+}
+
+#pressMe p {
+	margin-top: 10px;
+	font-weight: 500;
+	font-family: Lato,Helvetica,Arial,sans-serif;
+}
+
+
+
+

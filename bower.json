@@ -2,7 +2,7 @@
   "name": "es6-presentation",
   "version": "0.0.0",
   "dependencies": {
-  },
-  "devDependencies": {
+    "prismjs": "*",
+    "impress.js": "~0.5.3"
   }
 }
