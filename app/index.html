@@ -223,15 +223,16 @@ console.log( it.next( 13 ) );   // { value:42, done:true }
 			</div>
 			<div class="floatRight">
 				<h3>On a Granular Level</h3>
-				<ul>
-					<li>The generator starts out paused with foo(  5 ). The  first next() unpauses the initialized generator. Thus, any argument inside of next() would not be passed to any yield expressions, since no yield expressions have ran yet.</li>
-					<li>The  generator runs until it hits it?s first yield and that yield fires off. The generator pauses. The expression ?x + 1? is returned. This means 6 was not returned. What happens is the expression ?x + 1? is returned first, and only after it is evaluated to 6.</li>
-					<li>it.next(12) is called and corresponds to the first yield. This means it.next(12) applies to var y = 2 * (yield). Notice it is not var y = 2 * yield (x + 1)), this is because  the first yield has already fired off before it.next(12) was invoked. it.next(12) sets the first yield to 12.</li>
-					<li>As a continuation of step 3, value 8 is returned. This is because the iterator runs, evaluates y = 2 * 12, the iterator hits the second yield and returns y/3. Evaluated, this is 8.</li>
+				<ol id="granular">
+					<li>The generator is initialized and paused with var it = foo( 5 )</li>
+					<li>The  first next() unpauses the initialized generator. Thus, any argument inside of next() would not be passed to any previous yield statement, since no yield statements have ran yet. For example, if it.next("message") was given instead, that "message" would be descarded.</li>
+					<li>The generator runs until it hits it's first yield- and that yield fires off, sends it's expression to the first next() that was called, and the generator pauses. The expression x + 1...which is 5 + 1...is returned to next(), not 6!. Only after it is evaluated inside of next() do we have 6.</li>
+					<li>it.next(12) is called and corresponds to the first yield. This means it.next(12) applies to var y = 2 * (yield). Notice it is not var y = 2 * yield (x + 1)), this is because this first yield has aleady ran and given it's expression to the first/previous next(). This first yeild has been sitting and waiting for the second next() to unpause it...this yield is also waiting to recieve a message from the second next() that will unpause it, which will be the value 12. This value will replace the yield statement.</li>
+					<li>The generator, unpaused after the first yield by next(12), goes on to evaluate y = 2 * 12. The generator hits the second yield. The second yield pauses the generator and returns y/3(which is 24/3). Evaluated inside of the next(12) that called it, 8 is the result.</li>
 					<li>5 + 24+ 13 = 42. Notice the last it.next(13) corresponds to <strong>line 5</strong>. If you were to plug in, it would be z = 13. Again, this is because the message sent from next() replaces the <strong>previous</strong> yield statement(but does not plug into expression. This expression was evaluated previously).</li> 
 
 
-				</ul>
+				</ol>
 			</div>
 		</div>
 
