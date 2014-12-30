@@ -529,9 +529,12 @@
             activeStep = el;
 			
 			//DARIN MOD
+			console.log(activeStep);
 			switch (activeStep.id) {
 				case "generatorTitle":
-					console.log("ssss");
+					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
+					break;
+				case "classesTitle":
 					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
 					break;
 				default: 

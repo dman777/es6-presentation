@@ -13,6 +13,7 @@
 		<!-- bower:css -->
 		<!-- endbower -->
 		<!-- inject:css -->
+		<link rel="stylesheet" href="static/css/code-examples.css">
 		<link rel="stylesheet" href="static/css/main.css">
 		<link rel="stylesheet" href="static/css/prism.css">
 		<!-- endinject -->
@@ -47,7 +48,6 @@
 			<ul>
 				<li>Cooperative- can not be forced to stop- it chooses when to stop itself. Pauses itself with yield "expression".</li>
 				<li>nothing can pause a function from the outside...yield from with inside the function is the only way.</li>
-				<li>Can not resume itself. External control must be used to restart it- place it back into the queue of the event loop.</li>
 				<li>not to be confused with multi-threads! still single thread! still just one JS event loop! just another way of throwing jobs on the queue or taking them out of the stack</li>
 				<li>can not resume itself. external control must be used to restart it- place it back into the queue of the event loop.</li>
 				<img src="static/img/event-loop.jpg" id="eventLoopImg"></img>
@@ -82,10 +82,38 @@
 		</div>
 
 		<!-- Slide 3 -->
-		<div class="step alterStep" data-x="28000" data-y="0" data-rotate="10" data-z="0">
+		<div class="step alterStep enlarge" data-x="28000" data-y="0" data-rotate="10" data-z="0">
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #3</div>
-			<div>
+			<div> 
+				<pre id="genCode">
+				<code class="language-javascript">
+	function *foo() {
+		yield 1;
+		yield 2;
+		yield 3;
+		yield 4;
+		yield 5;
+	} 
+	var it = foo();
+	var message = it.next();
+	console.log(message); // { value:1, done:false }
+	console.log( it.next() ); // { value:2, done:false }
+	console.log( it.next() ); // { value:3, done:false }
+	console.log( it.next() ); // { value:4, done:false }
+	console.log( it.next() ); // { value:5, done:false }
+	console.log( it.next() ); // { value:undefined, done:true }
+				</code></pre>
+			</div>
+			<div class="floatRight">
+				<h3>Starting and Ending a Generator</h3>
+				<ul>
+					<li>Notice, we are not using var it = new foo(). We are creating a generator...not a object from a constructor.</li>
+					<li>Calling this generator with var it = foo(); doesn't execute any of it's contents. This will be more apparent later.</li>
+					<li>A generator is only finished({done: true}) when next() is called after all yield expressions have been exhausted</li>
+					<ul>
+						<li>You can use a return for this very last iteration. However, it is not advised if you want to treat this as a true generator. Please see next slide for more explanation.</li>
+					</ul>
 			</div>
 		</div>
 
@@ -93,6 +121,141 @@
 
 
 
+		<!-- Slide 4 -->
+		<div class="step alterStep enlarge" data-x="30000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #4</div>
+			<div>
+				<pre id="genCode">
+				<code class="language-javascript">
+function *foo() {
+    yield 1;
+    yield 2;
+    yield 3;
+    yield 4;
+    yield 5;
+    return 6;
+}
+
+for (var v of foo()) {
+    console.log( v );
+}
+// 1 2 3 4 5
+
+console.log( v ); // still `5`, not `6` :(
+				</code>
+				</pre>
+			</div>
+			<div class="floatRight">
+				<h3>A Python like Generator? Cool!</h3>
+                <ul>
+					<li>If running this as a python like generator, don't rely on a return statement. As you can see, the return statement will be discarded.</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Slide 5 -->
+		<div class="step alterStep" id="caseSelectSlide" data-x="32000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #5</div>
+			<div>
+				<h1>ES6</h1>
+				<pre id="genCode">
+				<code class="language-javascript">
+ES6:
+function *foo(x) {
+    var y = 2 * (yield (x + 1));
+    var z = yield (y / 3);
+    return (x + y + z);
+}
+
+var it = foo( 5 );
+				</code>
+				</pre>
+			</div>
+			<div class="floatRight" id="caseSelect">
+				<h1>ES5</h1>
+				<pre>
+				<code class="language-javascript">
+function foo(x) {
+    var y, z, step = 0;
+    return function next(val) {
+        switch (step++) {
+            case 0:               return x + 1;      break;
+            case 1: y = 2 * val;  return y / 3;      break;
+            case 2: z = val;      return x + y + z;  break;
+            default: throw "generator finished";
+        }
+    };
+}
+iterator = foo(5);
+iterator ();             // 6
+iterator(12);           // 8
+iterator(13);           // 42
+</code>
+</pre>
+			</div>
+		</div>
+
+		<!-- Slide 6-->
+		<div class="step alterStep enlarge" data-x="34000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #6</div>
+			<div>
+				<pre id="genCode" data-line="5">
+				<code class="language-javascript">
+function *foo(x) {
+    var y = 2 * (yield (x + 1));
+    var z = yield (y / 3);
+    return (x + y + z);
+}
+
+var it = foo( 5 );
+
+
+// note: not sending anything into `next()` here
+console.log( it.next() );       // { value:6, done:false }
+console.log( it.next( 12 ) );   // { value:8, done:false }
+console.log( it.next( 13 ) );   // { value:42, done:true }
+
+				</code>
+				</pre>
+			</div>
+			<div class="floatRight">
+				<h3>On a Granular Level</h3>
+				<ul>
+					<li>The generator starts out paused with foo(  5 ). The  first next() unpauses the initialized generator. Thus, any argument inside of next() would not be passed to any yield expressions, since no yield expressions have ran yet.</li>
+					<li>The  generator runs until it hits it?s first yield and that yield fires off. The generator pauses. The expression ?x + 1? is returned. This means 6 was not returned. What happens is the expression ?x + 1? is returned first, and only after it is evaluated to 6.</li>
+					<li>it.next(12) is called and corresponds to the first yield. This means it.next(12) applies to var y = 2 * (yield). Notice it is not var y = 2 * yield (x + 1)), this is because  the first yield has already fired off before it.next(12) was invoked. it.next(12) sets the first yield to 12.</li>
+					<li>As a continuation of step 3, value 8 is returned. This is because the iterator runs, evaluates y = 2 * 12, the iterator hits the second yield and returns y/3. Evaluated, this is 8.</li>
+					<li>5 + 24+ 13 = 42. Notice the last it.next(13) corresponds to <strong>line 5</strong>. If you were to plug in, it would be z = 13. Again, this is because the message sent from next() replaces the <strong>previous</strong> yield statement(but does not plug into expression. This expression was evaluated previously).</li> 
+
+
+				</ul>
+			</div>
+		</div>
+
+		<div id="classesTitle" class="step" data-x="36000" data-y="100" data-rotate-y="200" data-scale="5">
+			<div>Classes</div>
+		</div>
+
+		<!-- Slide 7-->
+		<div class="step alterStep enlarge" data-x="38000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #7</div>
+			<div>
+				<pre id="genCode">
+				<code class="language-javascript">
+				</code>
+				</pre>
+			</div>
+			<div class="floatRight">
+				<h3></h3>
+				<ul>
+					<li><li>
+				</ul>
+			</div>
+		</div>
 
 
 
