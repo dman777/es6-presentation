@@ -11,11 +11,10 @@
 		<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash|Sansita+One' rel='stylesheet' type='text/css'>
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet"/>
 		<!-- bower:css -->
-		<link rel="stylesheet" href="bower_components/prismjs/prism.css" />
 		<!-- endbower -->
 		<!-- inject:css -->
-		<link rel="stylesheet" href="static/css/flat-ui.css">
 		<link rel="stylesheet" href="static/css/main.css">
+		<link rel="stylesheet" href="static/css/prism.css">
 		<!-- endinject -->
 	</head>
 	<body class="impress-not-supported">
@@ -36,17 +35,59 @@
 				<li>Templates</li>
 				<li>Recommended Tools</li>
 				<li>Helpfull Links</li>
-
 		</div>
 		<div id="generatorTitle" class="step" data-x="4000" data-y="0" data-rotate-x="500" data-z="0">
-			<h1>Generators</h1>
+			<div>Generators</div>
 		</div>
-		<div class="step" data-x="8000" data-y="0" data-rotate="10" data-z="0">
-			<div class="slideTitle">Generators</div>
-			<div>
-				<pre><code class="language-css twilight">p { color: red }</code></pre>
-			</div>
 
+		<!-- Slide 1 -->
+		<div class="step alterStep" data-x="12000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #1</div>
+			<ul>
+				<li>Cooperative- can not be forced to stop- it chooses when to stop itself. Pauses itself with yield "expression".</li>
+				<li>nothing can pause a function from the outside...yield from with inside the function is the only way.</li>
+				<li>Can not resume itself. External control must be used to restart it- place it back into the queue of the event loop.</li>
+				<li>not to be confused with multi-threads! still single thread! still just one JS event loop! just another way of throwing jobs on the queue or taking them out of the stack</li>
+				<li>can not resume itself. external control must be used to restart it- place it back into the queue of the event loop.</li>
+				<img src="static/img/event-loop.jpg" id="eventLoopImg"></img>
+				<ul>
+					<li>Note- don't confuse this with being non-blocking. Functions still block while they run in the stack <strong>if</strong> the functions are not i/o related operation(ie: non network i/o, non disk i/o, etc).</li>
+				</ul>
+			</ul>
+		</div>
+
+		<!-- Slide 2 -->
+		<div class="step  alterStep" data-x="20000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #2</div>
+			<ul>
+				<li>great way to replace a infinite loop such as <div><code id = "loopSnippet" class="language-javascript">while (true) { .. }</code></li>
+				<li>Two way communication</li>
+				<ul>
+					<li>yield "expression" sends the expression as a message</li>
+					<li>yield with no expression sends out <code id="makeSmaller" class="language-markup">undefined</code>(don't be scared, undefined is just a value in javascript)</li>
+				</ul>
+				<li>Two types of generator syntax to use</li>
+				<div><pre id="yieldSnippet"><code class="language-javascript">
+				function *foo() {
+				    // stuff goes here
+				}
+				
+				// or
+
+				function* foo(){ }
+				</code></pre>
+			</ul>
+		</div>
+
+		<!-- Slide 3 -->
+		<div class="step alterStep" data-x="28000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Generators</div>
+			<div class="slideNumber">slide #3</div>
+			<div>
+			</div>
+		</div>
 
 
 
@@ -58,15 +99,16 @@
 
 	</div>
 	    <!-- bower:js -->
-	    <script src="bower_components/prismjs/prism.js"></script>
-		<script src="bower_components/impress.js/js/impress.js"></script>
 	    <!-- endbower -->
+		<!-- inject:js -->
+		<script src="static/js/impress.js"></script>
+		<script src="static/js/prism.js"></script>
+		<!-- endinject -->
 	<script>
     if ("ontouchstart" in document.documentElement) { 
 		document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
 	}
     </script>
-
 	<script>impress().init();</script>
 	</body>
 </html>
