@@ -537,6 +537,15 @@
 				case "classesTitle":
 					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
 					break;
+				case "templatesTitle":
+					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
+					break;
+				case "linksTitle":
+					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
+					break;
+				case "refsTitle":
+					document.getElementsByTagName("body")[0].style.backgroundColor = "#2C3E50";
+					break;
 				default: 
 					document.getElementsByTagName("body")[0].style.backgroundColor = "#ECF0F1";
 			}

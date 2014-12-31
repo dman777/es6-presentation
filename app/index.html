@@ -23,7 +23,7 @@
 		<div id="title" class="step" data-x="0" data-y="0" data-scale="4">
 			<span>welcome to the </span>
 			<h1>es6 presentation</h1>
-			<div id="pressMe"><p>Please press the right arrow to begin</p></div>
+			<div id="pressMe"><p>Please press the <strong>right</strong> arrow to begin</p></div>
 		</div>
 		<div id="howTo" class="step" data-x="-1950" data-y="-100" data-rotate="90" data-scale="5">
 			<h1>To use this presentation, simply use <br>right arrow to increment to next slide<br> or left arrow to go to previous slide.</h1>
@@ -62,7 +62,7 @@
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #2</div>
 			<ul>
-				<li>great way to replace a infinite loop such as <div><code id = "loopSnippet" class="language-javascript">while (true) { .. }</code></li>
+				<li>great way to replace a infinite loop such as <code id = "loopSnippet" class="language-javascript">while (true) { .. }</code></li>
 				<li>Two way communication</li>
 				<ul>
 					<li>yield "expression" sends the expression as a message</li>
@@ -402,7 +402,7 @@ var Square = (function (Polygon) {
 			</div>
 		</div>
 
-		<div id="classesTitle" class="step" data-x="46000" data-y="0" data-rotate="720">
+		<div id="templatesTitle" class="step" data-x="46000" data-y="0" data-rotate="720">
 			<div>Templates</div>
 		</div>
 
@@ -459,7 +459,7 @@ var cents = 25;
 upper  `Your total is ${dollars} and ${cents}`
 function upper(strings, ...values) {
 /*
-arg1 = [ ?Your total is ? , ?and? ]
+arg1 = [ 'Your total is ' , 'and' ]
 arg2 = 50
 arg3 = 25
 */
@@ -475,8 +475,60 @@ arg3 = 25
 				</ul>
 			</div>
 		</div>
+
+		<div id="refsTitle" class="step" data-x="54000" data-y="0" data-rotate="720">
+			<div>Recommended Tools</div>
+		</div>
+
+		<!-- Slide 14 -->
+		<div class="step alterStep" data-x="56000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Recommended Tools</div>
+			<div class="slideNumber">slide #14</div>
+			<div>
+				<h3>Where/how can I practice/play with this new technology? </h3>
+				<ul>
+					<li>Node 0.11.*</li>
+					<ul>
+						<li><a href="https://github.com/joyent/node/wiki/ES6-%28a.k.a.-Harmony%29-Features-Implemented-in-V8-and-Available-in-Node">List of ES6 features supported</a></li>
+						<li>Must run with --harmony flag</li>
+						<li>Does not support all ES6 features, only the ones currently supported by V8</li>
+					</ul>
+					<li><a href="http://www.es6fiddle.net">Online ES6 fiddle</a></li>
+					<li>traceur</li>
+					<ul>
+						<li>Best on command line instead of a Gulp module. Currently, collisions with other gulp modules.</li>
+					</ul>
+					<li>6to5</li>
+					<ul>
+						<li><a href="https://6to5.org/">https://6to5.org</a></li>
+						<li>Incredible tool to show the ES5 compiled code. Much for effective than traceur(what?s happening with your products, Google?)</li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+
+		<div id="linksTitle" class="step" data-x="58000" data-y="0" data-rotate="720">
+			<div>Recommended Links</div>
+		</div>
+
+		<!-- Slide 15 -->
+		<div class="step alterStep" data-x="60000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Recommended Links</div>
+			<div class="slideNumber">slide #15</div>
+			<div>
+				<h3>Recommended Links</h3>
+				<ul>
+					<li><a href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">ES6 Specification drafts</li>
+					<li><a href="https://github.com/ericdouglas/ES6-Learning">Eric Dougless</a></li>
+					<li><a href="https://github.com/lukehoban/es6features">lukehoban</a></li>
+					<li><a href="http://davidwalsh.name/">David Walsh Javascript Blog</a> *(highly recommended)</li>
+					<li><a href="http://kangax.github.io/compat-table/es6/">ES6 Browser Compatibility</a></li>
+				</ul>
+			</div>
+		</div>
+
 <!-- Darins template stuff 
-		<!-- Slide 14-->
+		 Slide 14
 		<div class="step alterStep enlarge" data-x="54000" data-y="0" data-rotate="10" data-z="0">
 			<div class="slideTitle">Templates</div>
 			<div class="slideNumber">slide #14</div>

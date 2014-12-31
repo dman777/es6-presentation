@@ -97,15 +97,16 @@ html {
 }
 
 #pressMe p {
+	padding: 5px;
 	margin-top: 10px;
 	font-weight: 500;
 	font-family: Lato,Helvetica,Arial,sans-serif;
 }
 
-#generatorTitle, #classesTitle {
+#generatorTitle, #classesTitle, #templatesTitle, #linksTitle, #refsTitle {
 	color: #ECF0F1;
 	font-family: inherit;
-	font-size: 200;
+	font-size: 150px;
 }
 
 .slideTitle {
@@ -160,3 +161,6 @@ ol#granular li {
 	margin: auto;
 }
 
+a {
+	color: #E74C3C;
+}
