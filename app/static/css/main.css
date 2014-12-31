@@ -49,7 +49,7 @@ html {
 }
 
 .enlarge {
-	width: 1500px;
+	width: 1400px;
 	padding: 50px;
 }
 
@@ -139,10 +139,24 @@ html {
 }
 
 #caseSelect {
-	margin-top: -80px;
+	margin-top: -90px;
 }
 
 #caseSelectSlide {
 	width: 1100px;
 	padding: 50px;
 }
+
+ol#granular li {
+	font-size: 17px;
+}
+
+#caseSelect {
+	margin-top: -80px;
+}
+
+#hereDoc {
+	width: 170px;
+	margin: auto;
+}
+

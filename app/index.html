@@ -86,7 +86,7 @@
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #3</div>
 			<div> 
-				<pre id="genCode">
+				<pre >
 				<code class="language-javascript">
 	function *foo() {
 		yield 1;
@@ -126,7 +126,7 @@
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #4</div>
 			<div>
-				<pre id="genCode">
+				<pre >
 				<code class="language-javascript">
 function *foo() {
     yield 1;
@@ -160,7 +160,7 @@ console.log( v ); // still `5`, not `6` :(
 			<div class="slideNumber">slide #5</div>
 			<div>
 				<h1>ES6</h1>
-				<pre id="genCode">
+				<pre >
 				<code class="language-javascript">
 ES6:
 function *foo(x) {
@@ -202,7 +202,7 @@ iterator(13);           // 42
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #6</div>
 			<div>
-				<pre id="genCode" data-line="5">
+				<pre  data-line="5">
 				<code class="language-javascript">
 function *foo(x) {
     var y = 2 * (yield (x + 1));
@@ -230,22 +230,258 @@ console.log( it.next( 13 ) );   // { value:42, done:true }
 					<li>it.next(12) is called and corresponds to the first yield. This means it.next(12) applies to var y = 2 * (yield). Notice it is not var y = 2 * yield (x + 1)), this is because this first yield has aleady ran and given it's expression to the first/previous next(). This first yeild has been sitting and waiting for the second next() to unpause it...this yield is also waiting to recieve a message from the second next() that will unpause it, which will be the value 12. This value will replace the yield statement.</li>
 					<li>The generator, unpaused after the first yield by next(12), goes on to evaluate y = 2 * 12. The generator hits the second yield. The second yield pauses the generator and returns y/3(which is 24/3). Evaluated inside of the next(12) that called it, 8 is the result.</li>
 					<li>5 + 24+ 13 = 42. Notice the last it.next(13) corresponds to <strong>line 5</strong>. If you were to plug in, it would be z = 13. Again, this is because the message sent from next() replaces the <strong>previous</strong> yield statement(but does not plug into expression. This expression was evaluated previously).</li> 
-
-
 				</ol>
 			</div>
 		</div>
 
-		<div id="classesTitle" class="step" data-x="36000" data-y="100" data-rotate-y="200" data-scale="5">
+		<div id="classesTitle" class="step" data-x="36000" data-y="0" data-rotate="720">
 			<div>Classes</div>
 		</div>
 
 		<!-- Slide 7-->
 		<div class="step alterStep enlarge" data-x="38000" data-y="0" data-rotate="10" data-z="0">
-			<div class="slideTitle">Generators</div>
+			<div class="slideTitle">Classes</div>
 			<div class="slideNumber">slide #7</div>
 			<div>
-				<pre id="genCode">
+				<pre  id="classCode">
+				<code class="language-javascript">
+class Polygon {
+    constructor(height, width) { //class constructor
+        this.name = 'Polygon';
+        this.height = height;
+        this.width = width;
+    }
+
+    sayName() { //class method
+      var greeting = 'Hi, I am a '+ this.name + '.';
+      return greeting;
+    }
+}
+
+class Square extends Polygon {
+    constructor(length) {
+        super(length, length); //call the parent method with super
+        this.name = 'Square';
+    }
+    sayName() {
+      var saidIt = super.sayName();
+      console.log(saidIt);
+    }
+
+}
+
+let s = new Square(5);
+
+s.sayName();
+</code>
+</pre>
+			</div>
+			<div class="floatRight">
+				<h3>Inheritance Basics</h3>
+				<ul>
+					<li>Super() calls your parent method. Similar to Python's function decorators, except your stuck with only methods.</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Slide 8-->
+		<div class="step alterStep enlarge" data-x="40000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Classes</div>
+			<div class="slideNumber">slide #8</div>
+			<div>
+				<pre >
+				<code class="language-javascript">
+// ES6:
+class Polygon {
+    constructor(height, width) { //class constructor
+        this.name = 'Polygon';
+        this.height = height;
+        this.width = width;
+    }
+
+// ES5:
+var Polygon = function Polygon(height, width) {
+  //class constructor
+  this.name = "Polygon";
+  this.height = height;
+  this.width = width;
+};
+</code>
+</pre>
+			</div>
+			<div class="floatRight">
+				<h3>But, how does it work?</h3>
+				<ul>
+					<li>Nothing unusual here. 'this' will make properties belong to the object created.</li>
+                    <li>Just sugar syntax, Javascript is not extended...still good old constructors. </li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Slide 9-->
+		<div class="step alterStep enlarge" data-x="42000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Classes</div>
+			<div class="slideNumber">slide #9</div>
+			<div>
+				<h1>ES5</h1>
+				<pre>
+				<code class="language-javascript">
+ES6:
+class Polygon {
+    constructor(height, width) { //class constructor
+        this.name = 'Polygon';
+        this.height = height;
+        this.width = width;
+    }
+
+}
+
+class Square extends Polygon {
+    constructor(length) {
+        super(length, length); //call the parent method with super
+        this.name = 'Square';
+    }
+}
+</code>
+</pre>
+			</div>
+			<div class="floatRight" id="caseSelect">
+				<h1>ES6</h1>
+				<pre>
+				<code class="language-javascript">
+var _makeObject = function (child, parent) {
+  child.prototype = Object.create(parent.prototype, {
+    constructor: {
+      value: child,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  child.__proto__ = parent;
+};
+
+var Polygon = function Polygon(height, width) {
+  //class constructor
+  this.name = "Polygon";
+  this.height = height;
+  this.width = width;
+};
+
+var Square = (function (Polygon) {
+  var Square = function Square(length) {
+    Polygon.call(this, length, length); //call the parent method with super
+    this.name = "Square";
+  };
+
+  _makeObject(Square, Polygon);
+
+  return Square;
+})(Polygon);
+</code>
+</pre>
+			</div>
+		</div>
+
+		<!-- Slide 10-->
+		<div class="step alterStep" data-x="44000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Classes</div>
+			<div class="slideNumber">slide #10</div>
+			<div>
+				<h3>But, how does it work? (continued from previous slide)</h3>
+				<ul>
+					<li>A Prototype object is created from constructor.</li>
+					<li>What is a prototype?</li>
+					<ul>
+						<li>property of the object to be created</li>
+						<li>it's a actual object containing properties. think: object.prototypeObject</li>
+						<li>These properties are memory references pointing to same memory location of variable/container.</li>
+						<li>This means, all objects of the class are of the same instances. For Example, all of them will have width '5'.</li>
+						<li>In contrast, 'this.var' instead of 'object.prototypeObject' would each have it's own memory location. Each would be it's own instance.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="classesTitle" class="step" data-x="46000" data-y="0" data-rotate="720">
+			<div>Templates</div>
+		</div>
+
+
+		<!-- Slide 11-->
+		<div class="step alterStep enlarge" data-x="48000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Templates</div>
+			<div class="slideNumber">slide #11</div>
+			<div>
+				<pre >
+				<code class="language-javascript">
+var x = 1;
+var y = 2;
+
+`${ x } + ${ y } = ${ x + y}`  // "1 + 2 = 3"
+</code>
+</pre>
+			</div>
+			<div class="floatRight">
+				<h3>Template String</h3>
+				<ul>
+					<li>Use backticks instead of double quotes</li>
+					<li>${} place holders</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Slide 12-->
+		<div class="step alterStep" data-x="50000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Templates</div>
+			<div class="slideNumber">slide #12</div>
+			<div id="hereDoc">
+                <h3>Here Doc Feature</h3>
+				<pre >
+				<code class="language-javascript">
+var s = `a
+     b
+     c`;
+//'a\n    b\n    c'
+				</code>
+				</pre>
+			</div>
+		</div>
+
+		<!-- Slide 13-->
+		<div class="step alterStep enlarge" data-x="52000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Templates</div>
+			<div class="slideNumber">slide #13</div>
+			<div>
+				<pre >
+				<code class="language-javascript">
+var dollars = 50;
+var cents = 25;
+upper  `Your total is ${dollars} and ${cents}`
+function upper(strings, ...values) {
+/*
+arg1 = [ ?Your total is ? , ?and? ]
+arg2 = 50
+arg3 = 25
+*/
+}
+</code>
+</pre>
+			</div>
+			<div class="floatRight">
+				<h3>Tagged template</h3>
+				<ul>
+					<li>A tag is simply a function(in this case upper()) that is called with the processed template string data</li>
+					<li>The first argument the function receives is an array containing the literal strings as they are interpreted by JavaScript. These arrays are organized such that a substitution should be made between items, so there needs to be a substitution made between the first and the second item, the second and the third item, and so on. </li>
+				</ul>
+			</div>
+		</div>
+<!-- Darins template stuff 
+		<!-- Slide 14-->
+		<div class="step alterStep enlarge" data-x="54000" data-y="0" data-rotate="10" data-z="0">
+			<div class="slideTitle">Templates</div>
+			<div class="slideNumber">slide #14</div>
+			<div>
+				<pre >
 				<code class="language-javascript">
 				</code>
 				</pre>
@@ -253,13 +489,11 @@ console.log( it.next( 13 ) );   // { value:42, done:true }
 			<div class="floatRight">
 				<h3></h3>
 				<ul>
-					<li><li>
+					<li></li>
 				</ul>
 			</div>
 		</div>
-
-
-
+-->
 
 	</div>
 	    <!-- bower:js -->

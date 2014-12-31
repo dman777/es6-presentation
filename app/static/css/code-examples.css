@@ -1,9 +1,11 @@
-pre * {
+pre  {
 	overflow: hidden;
+	float: left;
 }
 
 code  { 
 	display: block;
+	font-size: 13px;
 }
 
 #eventLoopImg {
@@ -35,16 +37,10 @@ code#loopSnippet {
 pre#yieldSnippet {
 	margin-left: 162px;
 	overflow: hidden;
-	width: 200px !important;
+	width: 200px;
 }
 pre#yieldSnippet code {
 	margin-left: -112px;
 	display: block;
 	font-size: 13px;
 }
-
-pre#genCode { 
-	float: left;
-}
-
-
