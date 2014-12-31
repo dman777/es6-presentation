@@ -62,11 +62,11 @@
 			<div class="slideTitle">Generators</div>
 			<div class="slideNumber">slide #2</div>
 			<ul>
-				<li>great way to replace a infinite loop such as <code id = "loopSnippet" class="language-javascript">while (true) { .. }</code></li>
+				<li>great way to replace a infinite loop such as <code  class="language-javascript snippet">while (true) { .. }</code></li>
 				<li>Two way communication</li>
 				<ul>
 					<li>yield "expression" sends the expression as a message</li>
-					<li>yield with no expression sends out <code id="makeSmaller" class="language-markup">undefined</code>(don't be scared, undefined is just a value in javascript)</li>
+					<li>yield with no expression sends out <code class="language-markup snippet">undefined</code>(don't be scared,  <code class="language-markup snippet">undefined</code> is just a value in javascript)</li>
 				</ul>
 				<li>Two types of generator syntax to use</li>
 				<div><pre id="yieldSnippet"><code class="language-javascript">
@@ -108,9 +108,9 @@
 			<div class="floatRight">
 				<h3>Starting and Ending a Generator</h3>
 				<ul>
-					<li>Notice, we are not using var it = new foo(). We are creating a generator...not a object from a constructor.</li>
-					<li>Calling this generator with var it = foo(); doesn't execute any of it's contents. This will be more apparent later.</li>
-					<li>A generator is only finished({done: true}) when next() is called after all yield expressions have been exhausted</li>
+					<li>Notice, we are not using <code class="language-javascript snippet">var it = new foo()</code>. We are creating a generator...not a object from a constructor.</li>
+					<li>Calling this generator with <code class="language-javascript snippet">var it = foo()</code> doesn't execute any of it's contents. This will be more apparent later.</li>
+					<li>A generator is only finished(<code class="language-javascript snippet">{done: true}</code>) when <code class="language-javascript snippet">next()</code> is called after all yield expressions have been exhausted</li>
 					<ul>
 						<li>You can use a return for this very last iteration. However, it is not advised if you want to treat this as a true generator. Please see next slide for more explanation.</li>
 					</ul>
@@ -149,7 +149,7 @@ console.log( v ); // still `5`, not `6` :(
 			<div class="floatRight">
 				<h3>A Python like Generator? Cool!</h3>
                 <ul>
-					<li>If running this as a python like generator, don't rely on a return statement. As you can see, the return statement will be discarded.</li>
+					<li>If running this as a python like generator, don't rely on a <code class="language-javascript snippet">return</code> statement. As you can see, the <code class="language-javascript snippet">return</code> statement will be discarded.</li>
 				</ul>
 			</div>
 		</div>
@@ -224,12 +224,12 @@ console.log( it.next( 13 ) );   // { value:42, done:true }
 			<div class="floatRight">
 				<h3>On a Granular Level</h3>
 				<ol id="granular">
-					<li>The generator is initialized and paused with var it = foo( 5 )</li>
-					<li>The  first next() unpauses the initialized generator. Thus, any argument inside of next() would not be passed to any previous yield statement, since no yield statements have ran yet. For example, if it.next("message") was given instead, that "message" would be descarded.</li>
-					<li>The generator runs until it hits it's first yield- and that yield fires off, sends it's expression to the first next() that was called, and the generator pauses. The expression x + 1...which is 5 + 1...is returned to next(), not 6!. Only after it is evaluated inside of next() do we have 6.</li>
-					<li>it.next(12) is called and corresponds to the first yield. This means it.next(12) applies to var y = 2 * (yield). Notice it is not var y = 2 * yield (x + 1)), this is because this first yield has aleady ran and given it's expression to the first/previous next(). This first yeild has been sitting and waiting for the second next() to unpause it...this yield is also waiting to recieve a message from the second next() that will unpause it, which will be the value 12. This value will replace the yield statement.</li>
-					<li>The generator, unpaused after the first yield by next(12), goes on to evaluate y = 2 * 12. The generator hits the second yield. The second yield pauses the generator and returns y/3(which is 24/3). Evaluated inside of the next(12) that called it, 8 is the result.</li>
-					<li>5 + 24+ 13 = 42. Notice the last it.next(13) corresponds to <strong>line 5</strong>. If you were to plug in, it would be z = 13. Again, this is because the message sent from next() replaces the <strong>previous</strong> yield statement(but does not plug into expression. This expression was evaluated previously).</li> 
+					<li>The generator is initialized and paused with <code class="language-javascript snippet">var it = foo( 5 )</code></li>
+					<li>The first <code class="language-javascript snippet">next()</code> unpauses the initialized generator. Thus, any argument inside of <code class="language-javascript snippet">next()</code> would not be passed to any previous yield statement, since no yield statements have ran yet. For example, if <code class="language-javascript snippet">it.next("message")</code> was given instead, that <code class="language-javascript snippet">"message"</code> would be descarded.</li>
+					<li>The generator runs until it hits it's first yield- and that yield fires off, sends it's expression to the first <code class="language-javascript snippet">next()</code> that was called, and the generator pauses. The expression <code class="language-javascript snippet">x + 1</code>...which is <code class="language-javascript snippet">5 + 1</code>...is returned to <code class="language-javascript snippet">next()</code>, not 6!. Only after it is evaluated inside of <code class="language-javascript snippet">next()</code> do we have 6.</li>
+					<li><code class="language-javascript snippet">it.next(12)</code> is called and corresponds to the first yield. This means <code class="language-javascript snippet">it.next(12)</code> applies to <code class="language-javascript snippet">var y = 2 * (yield)</code>. Notice it is not <code class="language-javascript snippet">var y = 2 * yield (x + 1))</code>, this is because this first yield has aleady ran and given it's expression to the first/previous <code class="language-javascript snippet">next()</code>. This first yeild has been sitting and waiting for the second <code class="language-javascript snippet">next()</code> to unpause it...this yield is also waiting to recieve a message from the second <code class="language-javascript snippet">next()</code> that will unpause it, which will be the value 12. This value will replace the yield statement.</li>
+					<li>The generator, unpaused after the first yield by <code class="language-javascript snippet">next(12)</code>, goes on to evaluate <code class="language-javascript snippet">y = 2 * 12</code>. The generator hits the second yield. The second yield pauses the generator and returns <code class="language-javascript snippet">y/3</code>(which is 24/3). Evaluated inside of the <code class="language-javascript snippet">next(12)</code> that called it, 8 is the result.</li>
+					<li><code class="language-javascript snippet"> 5 + 24+ 13 = 42 </code>. Notice the last <code class="language-javascript snippet">it.next(13)</code> corresponds to <strong>line 5</strong>. If you were to plug in, it would be <code class="language-javascript snippet"> z = 13 </code>. Again, this is because the message sent from <code class="language-javascript snippet">next()</code>replaces the <strong>previous</strong> yield statement(but does not plug into expression. This expression was evaluated previously).</li> 
 				</ol>
 			</div>
 		</div>
@@ -279,7 +279,7 @@ s.sayName();
 			<div class="floatRight">
 				<h3>Inheritance Basics</h3>
 				<ul>
-					<li>Super() calls your parent method. Similar to Python's function decorators, except your stuck with only methods.</li>
+					<li><code class="language-javascript snippet">super()</code> calls your parent method. Similar to Python's function decorators, except your stuck with only methods.</li>
 				</ul>
 			</div>
 		</div>
@@ -312,7 +312,7 @@ var Polygon = function Polygon(height, width) {
 			<div class="floatRight">
 				<h3>But, how does it work?</h3>
 				<ul>
-					<li>Nothing unusual here. 'this' will make properties belong to the object created.</li>
+					<li>Nothing unusual here. <code class="language-javascript snippet">this</code> will make properties belong to the object created.</li>
                     <li>Just sugar syntax, Javascript is not extended...still good old constructors. </li>
 				</ul>
 			</div>
@@ -394,10 +394,10 @@ var Square = (function (Polygon) {
 					<li>What is a prototype?</li>
 					<ul>
 						<li>property of the object to be created</li>
-						<li>it's a actual object containing properties. think: object.prototypeObject</li>
+						<li>it's a actual object containing properties. think: <code class="language-javascript snippet">object.prototypeObject</code></li>
 						<li>These properties are memory references pointing to same memory location of variable/container.</li>
-						<li>This means, all objects of the class are of the same instances. For Example, all of them will have width '5'.</li>
-						<li>In contrast, 'this.var' instead of 'object.prototypeObject' would each have it's own memory location. Each would be it's own instance.</li>
+						<li>This means all objects of the class are of the same instances. For Example, all of them will have <code class="language-javascript snippet">width= '5'</code>.</li>
+						<li>In contrast, <code class="language-javascript snippet">this.var</code> instead of <code class="language-javascript snippet">object.prototypeObject</code> would have it's own memory location for every object created from this contructor(or class....however you want think of it as. But it is really a constructor). That is....each property of a created object from this constructor would be it's own instance.</li>
 				</ul>
 			</div>
 		</div>
@@ -425,7 +425,7 @@ var y = 2;
 				<h3>Template String</h3>
 				<ul>
 					<li>Use backticks instead of double quotes</li>
-					<li>${} place holders</li>
+					<li><code class="language-javascript snippet">${}</code> place holders</li>
 				</ul>
 			</div>
 		</div>
@@ -470,7 +470,7 @@ arg3 = 25
 			<div class="floatRight">
 				<h3>Tagged template</h3>
 				<ul>
-					<li>A tag is simply a function(in this case upper()) that is called with the processed template string data</li>
+					<li>A tag is simply a function(in this case <code class="language-javascript snippet">upper()</code>) that is called with the processed template string data</li>
 					<li>The first argument the function receives is an array containing the literal strings as they are interpreted by JavaScript. These arrays are organized such that a substitution should be made between items, so there needs to be a substitution made between the first and the second item, the second and the third item, and so on. </li>
 				</ul>
 			</div>

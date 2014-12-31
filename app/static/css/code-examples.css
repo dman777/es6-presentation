@@ -15,7 +15,8 @@ code  {
 }
 
 
-pre#loopSnippet {
+#loopSnippet {
+	display: inline-block;
 	overflow: hidden;
 	width: 250px;
 	height: 15px;
@@ -26,12 +27,12 @@ pre#loopSnippet {
 	padding: 3px;
 }
 
-code#loopSnippet {
-	width: 170px;
+.snippet {
+	display: inline;
 	overflow: hidden;
-	display: block;
-	font-size: 13px;
-	padding-left: 13px;
+	font-size: 14px;
+	padding-left: 6px !important;
+	padding-right: 6px !important;
 }
 
 pre#yieldSnippet {
