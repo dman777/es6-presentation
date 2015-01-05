@@ -470,8 +470,10 @@ arg3 = 25
 			<div class="floatRight">
 				<h3>Tagged template</h3>
 				<ul>
-					<li>A tag is simply a function(in this case <code class="language-javascript snippet">upper()</code>) that is called with the processed template string data</li>
-					<li>The first argument the function receives is an array containing the literal strings as they are interpreted by JavaScript. These arrays are organized such that a substitution should be made between items, so there needs to be a substitution made between the first and the second item, the second and the third item, and so on. </li>
+					<li>A tag is simply a function(in this case <code class="language-javascript snippet">upper()</code>) that is called with the template string data</li>
+					<li>The first argument the function receives is an array containing the literal string <code class="language-javascript snippet">['Your total is','and']</code>.</li>
+					<li>The first agrgument, the literal string, is actually made into 2 seperate arrays- cooked and raw. The cooked is the literal string...as is. The raw array is the same, but any special characters, such as a newline character <code class="language-javascript snippet">\n</code> would be escaped to <code class="language-javascript snippet">\\n</code>
+					<li>These arrays are organized such that a substitution should be made between items, so there needs to be a substitution made between the first and the second item, the second and the third item, and so on. Hence, your substition is complete.</li>
 				</ul>
 			</div>
 		</div>
